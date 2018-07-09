@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ChartStock from './components/ChartStock'
 import Search from './components/Search'
+import Detail from './components/Detail'
 import _ from 'lodash'
 
 class App extends Component {
@@ -10,16 +11,19 @@ class App extends Component {
     searchTerm : '',
     stockSymbol : '',
     result: [],
-    chartData: []
+    chartData: [],
+    detailInfo: null
   }
 
 
   handleSearch= (event) =>{
-    this.setState({ searchTerm: event.target.value}, _.debounce(this.fetchSymbols, 1000) )
+    this.setState({ searchTerm: event.target.value}, _.debounce(this.fetchSymbols, 300) )
   }
 
   handleSelect = (stockSymbol) => {
-    this.setState({stockSymbol, result:[], searchTerm: '' }, this.fetchChart)
+    this.setState({stockSymbol, result:[], searchTerm: '' }, () => {
+      this.fetchChart();
+      this.fetchQuote(); })
   }
 
 
@@ -28,8 +32,6 @@ class App extends Component {
     if (this.state.searchTerm.length > 0 ) {
       fetch(API_URL).then(r => r.json()).then(data => this.setState({result: data}))
     } else { this.setState({result: [] }) }
-
-
   }
 
   fetchChart = () => {
@@ -39,10 +41,16 @@ class App extends Component {
         this.setState({chartData})
       })
     }
-
-
   }
 
+  fetchQuote = () => {
+  const API_URL = 'http://localhost:4000/api/v1/quote/' + this.state.stockSymbol
+    if (this.state.stockSymbol.length > 0 ) {
+      fetch(API_URL).then(r => r.json()).then(detailInfo => {
+        this.setState({detailInfo})
+      })
+    }
+  }
 
 
   render() {
@@ -53,7 +61,11 @@ class App extends Component {
         handleSearch={this.handleSearch} 
         data = {this.state.result}
         handleSelect = {this.handleSelect}/>
-        <ChartStock data={this.state.chartData}/>
+
+
+        <ChartStock data={this.state.chartData} symbol={this.state.stockSymbol}/>
+
+        <Detail data={this.state.detailInfo}/>
       </div>
     );
   }

@@ -15,7 +15,8 @@ class ChartStock extends Component {
         // {"2017-01-01": 11, "2017-01-02": 6}
         return (
             <div>
-                <LineChart data={dataToDisplay}  min={null} max={null}/>
+                <LineChart data={dataToDisplay}  min={null} max={null} label="Price"/>
+                {this.props.symbol ? this.props.symbol : null }
             </div>
         );
     }
