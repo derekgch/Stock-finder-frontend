@@ -19,18 +19,27 @@ class App extends Component {
   }
 
   handleSelect = (stockSymbol) => {
-    this.setState({stockSymbol}, this.fetchChart)
+    this.setState({stockSymbol, result:[], searchTerm: '' }, this.fetchChart)
   }
 
 
   fetchSymbols= () =>{
     const API_URL = "http://localhost:4000/api/v1/search/" + this.state.searchTerm
-    fetch(API_URL).then(r => r.json()).then(data => this.setState({result: data}))
+    if (this.state.searchTerm.length > 0 ) {
+      fetch(API_URL).then(r => r.json()).then(data => this.setState({result: data}))
+    } else { this.setState({result: [] }) }
+
+
   }
 
   fetchChart = () => {
     const API_URL = "http://localhost:4000/api/v1/stock_symbols/" + this.state.stockSymbol
-    fetch(API_URL).then(r => r.json()).then(chartData => this.setState({chartData}))
+    if (this.state.stockSymbol.length > 0 ) {
+      fetch(API_URL).then(r => r.json()).then(chartData => {
+        this.setState({chartData})
+      })
+    }
+
 
   }
 

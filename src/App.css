@@ -26,3 +26,24 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+/* 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+} */
+.dropdown-content {
+  position: absolute;
+  background-color: lightgray;
+}
+
+.results-list {
+  border: 1px solid darkgray;
+  margin: 1px;
+  padding: 1px;
+  opacity: .8;
+  font-size: 20px;
+}

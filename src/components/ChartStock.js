@@ -7,17 +7,15 @@ ReactChartkick.addAdapter(Chart)
 
 class ChartStock extends Component {
     render() {
-        // const dataTodiplay = this.props.data.map(d => {[d.data]=d.close})
-        let dataTodiplay 
+        // const dataToDisplay = this.props.data.map(d => {[d.data]=d.close})
+        let dataToDisplay 
         this.props.data.forEach(element => {
-            dataTodiplay = {...dataTodiplay, [element.date] : element.close}}
+            dataToDisplay = {...dataToDisplay, [element.date] : element.close}}
         );
         // {"2017-01-01": 11, "2017-01-02": 6}
-        console.log(dataTodiplay);
-
         return (
             <div>
-                <LineChart data={dataTodiplay}  min={null} max={null}/>
+                <LineChart data={dataToDisplay}  min={null} max={null}/>
             </div>
         );
     }
