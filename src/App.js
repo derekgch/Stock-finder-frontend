@@ -5,6 +5,9 @@ import ChartStock from './components/ChartStock'
 import Search from './components/Search'
 import Detail from './components/Detail'
 import _ from 'lodash'
+import Login from './components/Login'
+import { Link, Route, Switch, Redirect } from 'react-router-dom'
+
 
 class App extends Component {
   state = {
@@ -12,7 +15,7 @@ class App extends Component {
     stockSymbol : '',
     result: [],
     chartData: [],
-    detailInfo: null
+    detailInfo: null,
   }
 
 
@@ -57,15 +60,33 @@ class App extends Component {
     console.log(this.state.searchTerm)
     return (
       <div className="App">
-        <Search searchTerm={this.state.searchTerm} 
-        handleSearch={this.handleSearch} 
-        data = {this.state.result}
-        handleSelect = {this.handleSelect}/>
+        <Switch>
+          <Route path="/login" component={(props) => {
+            return (
+              <Login { ...props }/>
+            )
+          }
+          }/>
+          <Route path="/" component={(props) => {
+            return (
+              <React.Fragment>
+              <Search searchTerm={this.state.searchTerm} 
+              handleSearch={this.handleSearch} 
+              data = {this.state.result}
+              handleSelect = {this.handleSelect} 
+              { ...props }/>
 
 
-        <ChartStock data={this.state.chartData} symbol={this.state.stockSymbol}/>
+              <ChartStock data={this.state.chartData} symbol={this.state.stockSymbol}
+              { ...props } />
 
-        <Detail data={this.state.detailInfo}/>
+              <Detail data={this.state.detailInfo} { ...props }/>
+              </React.Fragment>
+            )
+          }
+          }/>
+        </Switch>
+        {/* <Redirect to="/" /> */}
       </div>
     );
   }
