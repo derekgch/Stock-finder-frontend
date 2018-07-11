@@ -22,20 +22,22 @@ class App extends Component {
   }
 
   componentDidMount(){
-    const userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
-    const url = "http://localhost:4000/users/" + userId;
-    let config = {
-      headers: {
-          'Content-Type': 'application/JSON',
-          'Authorization': localStorage.getItem('token')
-      },
-  }
-    
-    fetch(url,config).then(r =>r.json()).then(
-      data => this.setState({ fav : data.user, stockSymbol:data.user[0].stock_symbol}, () => {
-        this.handleSelect(this.state.stockSymbol)
-      })
-    )
+    if(localStorage.getItem('token')){
+      const userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
+      const url = "http://localhost:4000/users/" + userId;
+      let config = {
+        headers: {
+            'Content-Type': 'application/JSON',
+            'Authorization': localStorage.getItem('token')
+        },
+    }
+      
+      fetch(url,config).then(r =>r.json()).then(
+        data => this.setState({ fav : data.user, stockSymbol:data.user[0].stock_symbol}, () => {
+          this.handleSelect(this.state.stockSymbol)
+        })
+      )
+    }
   }
 
   handleSearch= (event) =>{    

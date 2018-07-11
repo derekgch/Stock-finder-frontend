@@ -33,15 +33,13 @@ class Login extends Component {
         let config = {
             method: "POST",
             headers: {
-                'Content-Type': 'application/JSON',
-                'Authorization': localStorage.getItem('token')
+                'Content-Type': 'application/JSON'
             },
             body: JSON.stringify(this.state)
         }
 
         return fetch(url, config).then(this.handleErrors).then(data => {
             localStorage.setItem('token', data.token);
-            
         })
     }
 
