@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import _ from 'lodash'
 
 class Search extends Component {
@@ -7,16 +7,22 @@ class Search extends Component {
             onClick={()=>this.props.handleSelect(e.stock_symbol)}>{e.stock_symbol} : {e.name}</p>)
 
         console.log(suggestResults);
-        return (            
+        return (    
+            <Fragment >        
             <div className="dropdown">
-                <input id="myInput" type='text' placeholder="Search Stocks here"
-                value={this.props.searchTerm} 
-                onChange={this.props.handleSearch}/>
-                <div id="myDropdown" className="dropdown-content">
-                    {suggestResults}    
-                </div>
-
+                <input 
+                    
+                    id="myInput"
+                    type='text' 
+                    placeholder="Search Stocks here"
+                    value={this.props.searchTerm} 
+                    onChange={this.props.handleSearch}
+                    />
+                    <div id="myDropdown" className="dropdown-content">
+                        {suggestResults}    
+                    </div>
             </div>
+            </ Fragment >    
         );
     }
 }

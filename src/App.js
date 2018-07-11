@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ChartStock from './components/ChartStock'
@@ -7,6 +7,7 @@ import Detail from './components/Detail'
 import _ from 'lodash'
 import Login from './components/Login'
 import { Link, Route, Switch, Redirect } from 'react-router-dom'
+import SignUp from './components/SignUp'
 
 
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
   }
 
 
-  handleSearch= (event) =>{
+  handleSearch= (event) =>{    
     this.setState({ searchTerm: event.target.value}, _.debounce(this.fetchSymbols, 300) )
   }
 
@@ -57,32 +58,45 @@ class App extends Component {
 
 
   render() {
+    console.log(this.props);
+    
     console.log(this.state.searchTerm)
     return (
       <div className="App">
         <Switch>
           <Route path="/login" component={(props) => {
             return (
-              <Login { ...props }/>
+              < Fragment >
+                <Login { ...props }/>
+                <SignUp {...props}/>
+              </Fragment>
             )
           }
           }/>
-          <Route path="/" component={(props) => {
-            return (
-              <React.Fragment>
-              <Search searchTerm={this.state.searchTerm} 
-              handleSearch={this.handleSearch} 
-              data = {this.state.result}
-              handleSelect = {this.handleSelect} 
-              { ...props }/>
-
-
-              <ChartStock data={this.state.chartData} symbol={this.state.stockSymbol}
-              { ...props } />
-
-              <Detail data={this.state.detailInfo} { ...props }/>
-              </React.Fragment>
-            )
+          <Route path="/" render={(props) => {
+            if (!!localStorage.getItem('token') === false) {
+              props.history.push('/login')
+              return null
+            } else {
+              return (
+                <React.Fragment>
+                <Search 
+               
+                searchTerm={this.state.searchTerm} 
+                handleSearch={this.handleSearch} 
+                data = {this.state.result}
+                handleSelect = {this.handleSelect} 
+                { ...props }/>
+  
+  
+                <ChartStock data={this.state.chartData} symbol={this.state.stockSymbol}
+                { ...props } />
+  
+                <Detail data={this.state.detailInfo} { ...props }/>
+                </React.Fragment>
+              )
+            }
+            
           }
           }/>
         </Switch>
