@@ -12,6 +12,22 @@ class Detail extends Component {
         return shortValue+suffixes[suffixNum];
     }
 
+    handleClick= (event) => {
+        event.preventDefault();
+        const userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
+        const url = "http://localhost:4000/users/" + userId;
+        const config ={
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/JSON',
+                'Authorization': localStorage.getItem('token')
+            },
+            body: JSON.stringify({symbolId: this.props.data.symbol})
+        }
+        console.log(url, config);
+        
+        fetch(url, config).then(r =>r.json()).then(console.log)
+    }
 
     render() {
         console.log(this.props.data);
@@ -19,6 +35,7 @@ class Detail extends Component {
             let {symbol, companyName,latestTime,week52High, week52Low, marketCap, changePercent, delayedPrice} = this.props.data
             return (
                 <div>
+                    <button onClick={this.handleClick}> Save</button> <br/>
                     symbol: {symbol} <br />
                      {companyName} <br />
                     marketCap: {this.intToString(marketCap)} <br />

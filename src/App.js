@@ -8,6 +8,7 @@ import _ from 'lodash'
 import Login from './components/Login'
 import { Link, Route, Switch, Redirect } from 'react-router-dom'
 import SignUp from './components/SignUp'
+import Favorite from './components/Favorite'
 
 
 class App extends Component {
@@ -17,8 +18,25 @@ class App extends Component {
     result: [],
     chartData: [],
     detailInfo: null,
+    fav: []
   }
 
+  componentDidMount(){
+    const userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
+    const url = "http://localhost:4000/users/" + userId;
+    let config = {
+      headers: {
+          'Content-Type': 'application/JSON',
+          'Authorization': localStorage.getItem('token')
+      },
+  }
+    
+    fetch(url,config).then(r =>r.json()).then(
+      data => this.setState({ fav : data.user, stockSymbol:data.user[0].stock_symbol}, () => {
+        this.handleSelect(this.state.stockSymbol)
+      })
+    )
+  }
 
   handleSearch= (event) =>{    
     this.setState({ searchTerm: event.target.value}, _.debounce(this.fetchSymbols, 300) )
@@ -29,6 +47,8 @@ class App extends Component {
       this.fetchChart();
       this.fetchQuote(); })
   }
+
+
 
 
   fetchSymbols= () =>{
@@ -58,17 +78,16 @@ class App extends Component {
 
 
   render() {
-    console.log(this.props);
+    console.log(this.state.fav);
     
-    console.log(this.state.searchTerm)
     return (
       <div className="App">
         <Switch>
           <Route path="/login" component={(props) => {
             return (
               < Fragment >
-                <Login { ...props }/>
-                <SignUp {...props}/>
+                <Login  { ...props }/>
+                <SignUp  {...props}/>
               </Fragment>
             )
           }
@@ -87,12 +106,13 @@ class App extends Component {
                 data = {this.state.result}
                 handleSelect = {this.handleSelect} 
                 { ...props }/>
-  
-  
+    
                 <ChartStock data={this.state.chartData} symbol={this.state.stockSymbol}
                 { ...props } />
   
-                <Detail data={this.state.detailInfo} { ...props }/>
+                <Detail data={this.state.detailInfo} userId={this.state.userId} { ...props }/>
+
+                <Favorite fav={this.state.fav}/>
                 </React.Fragment>
               )
             }
