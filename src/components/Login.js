@@ -15,6 +15,17 @@ class Login extends Component {
     handleSumbit = (event) => {
         event.preventDefault();
         this.loginSession().then(() => this.setState({password: "", username: ""}))
+        .then(() => {this.props.history.push('/')})
+        .catch(function(error) {
+            alert("Wrong username / Password")
+        })
+    }
+
+     handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
     }
 
     loginSession(){
@@ -27,7 +38,7 @@ class Login extends Component {
             body: JSON.stringify(this.state)
         }
 
-        return fetch(url, config).then(r => r.json()).then(data => {
+        return fetch(url, config).then(this.handleErrors).then(data => {
             localStorage.setItem('token', data.token)
         })
     }
