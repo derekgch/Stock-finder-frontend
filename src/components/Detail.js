@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button  } from 'react-materialize'
 
 class Detail extends Component {
 
@@ -24,20 +25,19 @@ class Detail extends Component {
             },
             body: JSON.stringify({symbolId: this.props.data.symbol})
         }
-        console.log(url, config);
         
         fetch(url, config).then(r =>r.json()).then(this.props.fetchFavs)
     }
 
     render() {
-        console.log(this.props.data);
         if(this.props.data){
             let {symbol, companyName,latestTime,week52High, week52Low, marketCap, changePercent, delayedPrice} = this.props.data
             return (
                 <div>
-                    <button
+                    <Button floating large className='red' waves='light' icon='add'  onClick={this.handleClick}/>
+                    {/* <button
                         className="btn-floating btn-large waves-effect waves-light red"
-                     onClick={this.handleClick}><i class="material-icons">+</i></button> <br/>
+                     onClick={this.handleClick}><i class="material-icons">+</i></button> <br/> */}
                     <p>Symbol: {symbol} {" "}
                     {companyName}
                     </p>

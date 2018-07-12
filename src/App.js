@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ChartStock from './components/ChartStock'
 import Search from './components/Search'
 import Detail from './components/Detail'
 import _ from 'lodash'
 import Login from './components/Login'
-import { Link, Route, Switch, Redirect } from 'react-router-dom'
+import {Route, Switch } from 'react-router-dom'
 import SignUp from './components/SignUp'
 import Favorite from './components/Favorite'
 
@@ -21,7 +20,7 @@ class App extends Component {
     fav: []
   }
 
-  componentDidMount(){
+  componentDidMount(){    
     this.fetchFavs()
   }
 
@@ -43,11 +42,15 @@ class App extends Component {
   
 
   handleSearch= (event) =>{    
-    this.setState({ searchTerm: event.target.value}, _.debounce(this.fetchSymbols, 300) )
+    if (event.target.value) {
+      this.setState({ searchTerm: event.target.value.toUpperCase()}, this.fetchSymbols )
+    }
+    
   }
 
   handleSelect = (stockSymbol) => {
-    this.setState({stockSymbol, result:[], searchTerm: '' }, () => {
+    const foundCompany= this.state.result.find( e => e.name.includes(stockSymbol))      
+    this.setState({stockSymbol: foundCompany.stock_symbol, result:[], searchTerm: '' }, () => {
       this.fetchChart();
       this.fetchQuote(); })
   }
@@ -81,9 +84,7 @@ class App extends Component {
   }
 
 
-  render() {
-    console.log(this.state.fav);
-    
+  render() {    
     return (
       <div className="App" >
         <Switch>
@@ -110,7 +111,10 @@ class App extends Component {
                 data = {this.state.result}
                 handleSelect = {this.handleSelect} 
                 { ...props }/>
-    
+                <Detail data={this.state.detailInfo} userId={this.state.userId} { ...props }
+                  fetchFavs={this.fetchFavs}
+                  
+                />
                 <ChartStock 
                 data={this.state.chartData} 
                 symbol={this.state.stockSymbol}
@@ -118,11 +122,9 @@ class App extends Component {
                 { ...props } 
                 />
   
-                <Detail data={this.state.detailInfo} userId={this.state.userId} { ...props }
-                  fetchFavs={this.fetchFavs}
-                />
+                
 
-                <Favorite  fav={this.state.fav} fetchFavs={this.fetchFavs}/>
+                <Favorite  fav={this.state.fav} fetchFavs={this.fetchFavs}  { ...props } />
                 </React.Fragment>
               )
             }

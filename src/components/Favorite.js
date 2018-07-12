@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ChartStock from './ChartStock'
+import { Button  } from 'react-materialize'
+
 
 class Favorite extends Component {
 
@@ -7,9 +9,12 @@ class Favorite extends Component {
         allFavsdata: []
     }
 
-    componentDidUpdate(prevProps) {
-        console.log("Hit this");
-        
+    componentDidMount = () => {
+      this.props.fetchFavs()
+    }
+    
+
+    componentDidUpdate(prevProps) {        
         // console.log("p", prevProps.fav.length, "this", this.props.fav.length)
         if(prevProps.fav.length !== this.props.fav.length) {  
             this.setState({
@@ -23,7 +28,7 @@ class Favorite extends Component {
         const API_URL = "http://localhost:4000/api/v1/stock_symbols/" 
         this.props.fav.forEach(element => {
             fetch(API_URL + element.stock_symbol).then(r => r.json())                
-            .then( d => { console.log('d', d);this.setState({ allFavsdata: [...this.state.allFavsdata, d ] })            })
+            .then( d => {this.setState({ allFavsdata: [...this.state.allFavsdata, d ] })            })
         });
     }
     
@@ -53,25 +58,34 @@ class Favorite extends Component {
        }
 
        displayFavs = () => {
-        let i = 0
-        console.log('FAVORTIE' ,this.props.fav);
-        console.log('this.state.allFavsdata',this.state.allFavsdata);
-        
-        
+        let i = 0       
         if (this.state.allFavsdata.length > 0 && this.state.allFavsdata.length === this.props.fav.length ) {
             return this.state.allFavsdata.map( data =>{
                 return <ChartStock data={data} symbol={this.props.fav[i++].stock_symbol} handleDelete={this.handleDelete}/>
             })
         } else null
-       
     }
 
+    handleLogout = () => {
+      localStorage.removeItem('token')
+      this.props.history.push('/login')
+    }
+    
+
     render() {
-        console.log("allFavsdata", this.state.allFavsdata)
         return (
+            <Fragment>
+                <hr/>
+            <span>
+            <Button onClick={this.handleLogout} waves='light'>Log Out</Button>
+                <h4>Your Saved Charts</h4>
+            </span>
+            <br/><br/>
+            <br/><br/>
             <div className="container" >
                 {this.displayFavs()}
             </div>
+            </Fragment>
         );
     }
 }

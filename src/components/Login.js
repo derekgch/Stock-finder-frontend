@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button  } from 'react-materialize'
+
 
 class Login extends Component {
     state={
@@ -49,7 +51,7 @@ class Login extends Component {
                 <form action="" onSubmit = {this.handleSumbit}>
                 <input value= {this.state.username} type="text" name="username" id="username" placeholder="username" onChange={this.handleChange}/>
                 <input value= {this.state.password} type="password" name="password" id="password" placeholder="password" onChange={this.handleChange}/>
-                <button>Login</button>
+                <Button waves='light'> Login</Button>
                 </form>
             </div>
         );

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button  } from 'react-materialize'
+
 
 class SignUp extends Component {
     state = {
@@ -43,7 +45,8 @@ class SignUp extends Component {
                     onChange={this.handleChange}
                     value={this.state.password}
                      />
-                    <input type="submit" value="Create Account"/>
+                     <Button> Create Account </Button>
+                    {/* <input type="submit" value="Create Account"/> */}
                 </form>    
             </div>
         );
