@@ -48,8 +48,9 @@ class App extends Component {
   }
 
   handleSelect = (stockSymbol) => {
-    const foundCompany= this.state.result.find( e => e.name.includes(stockSymbol))      
-    this.setState({stockSymbol: foundCompany.stock_symbol, result:[], searchTerm: '' }, () => {
+    const sym = stockSymbol.split(":")[0].trim()
+    // const foundCompany= this.state.result.find( e => e.name.includes(stockSymbol))      
+    this.setState({stockSymbol: sym, result:[], searchTerm: '' }, () => {
       this.fetchChart();
       this.fetchQuote(); })
   }

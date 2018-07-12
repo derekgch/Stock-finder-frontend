@@ -3,14 +3,18 @@ import { Row, Autocomplete } from 'react-materialize'
 
 
 class Search extends Component {
+
     render() {
         // const suggestResults = this.props.data.map(e => <p className="results-list" 
         //     onClick={()=>this.props.handleSelect(e.stock_symbol)}>{e.stock_symbol} : {e.name}</p>)
         // console.log(suggestResults);
             let suggestResultsObj = {}
             this.props.data.forEach(e => {
-                suggestResultsObj = {...suggestResultsObj, [e.name]: null} 
+                let key =e.stock_symbol + " : " + e.name
+                suggestResultsObj = {...suggestResultsObj, [key]: null} 
             })
+
+        console.log(this.props.data);
 
         
         return (    
