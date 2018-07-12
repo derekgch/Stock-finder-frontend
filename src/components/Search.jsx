@@ -9,7 +9,7 @@ class Search extends Component {
         console.log(suggestResults);
         return (    
             <Fragment >        
-            <div className="dropdown">
+            <div className="dropdown1"   >
                 <input 
                     
                     id="myInput"

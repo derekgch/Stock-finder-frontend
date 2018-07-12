@@ -35,7 +35,6 @@ class App extends Component {
             'Authorization': localStorage.getItem('token')
         },
     }
-
       fetch(url,config).then(r =>r.json()).then(data => this.setState({ fav : data.user}))
     }
   }
@@ -86,7 +85,7 @@ class App extends Component {
     console.log(this.state.fav);
     
     return (
-      <div className="App">
+      <div className="App" >
         <Switch>
           <Route path="/login" component={(props) => {
             return (
@@ -112,12 +111,18 @@ class App extends Component {
                 handleSelect = {this.handleSelect} 
                 { ...props }/>
     
-                <ChartStock data={this.state.chartData} symbol={this.state.stockSymbol}
-                { ...props } />
+                <ChartStock 
+                data={this.state.chartData} 
+                symbol={this.state.stockSymbol}
+                mainChart="true"
+                { ...props } 
+                />
   
-                <Detail data={this.state.detailInfo} userId={this.state.userId} { ...props }/>
+                <Detail data={this.state.detailInfo} userId={this.state.userId} { ...props }
+                  fetchFavs={this.fetchFavs}
+                />
 
-                <Favorite fav={this.state.fav} fetchFavs={this.fetchFavs}/>
+                <Favorite  fav={this.state.fav} fetchFavs={this.fetchFavs}/>
                 </React.Fragment>
               )
             }

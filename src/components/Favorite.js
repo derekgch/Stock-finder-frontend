@@ -8,9 +8,14 @@ class Favorite extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        console.log("Hit this");
+        
         // console.log("p", prevProps.fav.length, "this", this.props.fav.length)
-        if(prevProps.fav.length !== this.props.fav.length) {     
-            this.fetchFavsData()
+        if(prevProps.fav.length !== this.props.fav.length) {  
+            this.setState({
+                allFavsdata: []
+            }, this.fetchFavsData)   
+            
         }
     }
     
@@ -39,7 +44,12 @@ class Favorite extends Component {
                })
            }
    
-         fetch(API, config).then(r => r.json()).then(this.props.fetchFavs).then(this.fetchFavsData)
+         fetch(API, config).then(r => r.json())
+         .then(this.props.fetchFavs)
+         .then( () => 
+           { this.setState({allFavsdata: []})
+            this.fetchFavsData}
+            )
        }
 
        displayFavs = () => {
@@ -48,7 +58,7 @@ class Favorite extends Component {
         console.log('this.state.allFavsdata',this.state.allFavsdata);
         
         
-        if (this.state.allFavsdata.length > 0 && this.state.allFavsdata.length ===this.props.fav.length ) {
+        if (this.state.allFavsdata.length > 0 && this.state.allFavsdata.length === this.props.fav.length ) {
             return this.state.allFavsdata.map( data =>{
                 return <ChartStock data={data} symbol={this.props.fav[i++].stock_symbol} handleDelete={this.handleDelete}/>
             })
@@ -59,7 +69,7 @@ class Favorite extends Component {
     render() {
         console.log("allFavsdata", this.state.allFavsdata)
         return (
-            <div>
+            <div className="container" >
                 {this.displayFavs()}
             </div>
         );

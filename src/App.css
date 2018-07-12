@@ -38,10 +38,10 @@
   padding: 14px 20px 12px 55px;
 }
 
-.dropdown {
+/* .dropdown1 {
   position: relative;
   display: inline-block;
-}
+} */
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
@@ -63,3 +63,15 @@
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #f1f1f1}
+
+.container {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+
+}
+
+.column {
+  flex: 1;
+  /* border: 1px solid blue; */
+}

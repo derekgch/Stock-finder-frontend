@@ -45,7 +45,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div  className="column" >
                 <form action="" onSubmit = {this.handleSumbit}>
                 <input value= {this.state.username} type="text" name="username" id="username" placeholder="username" onChange={this.handleChange}/>
                 <input value= {this.state.password} type="password" name="password" id="password" placeholder="password" onChange={this.handleChange}/>

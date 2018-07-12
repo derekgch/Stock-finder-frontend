@@ -26,7 +26,7 @@ class Detail extends Component {
         }
         console.log(url, config);
         
-        fetch(url, config).then(r =>r.json()).then(console.log)
+        fetch(url, config).then(r =>r.json()).then(this.props.fetchFavs)
     }
 
     render() {
@@ -35,7 +35,9 @@ class Detail extends Component {
             let {symbol, companyName,latestTime,week52High, week52Low, marketCap, changePercent, delayedPrice} = this.props.data
             return (
                 <div>
-                    <button onClick={this.handleClick}> Save</button> <br/>
+                    <button
+                        className="btn-floating btn-large waves-effect waves-light red"
+                     onClick={this.handleClick}><i class="material-icons">+</i></button> <br/>
                     <p>Symbol: {symbol} {" "}
                     {companyName}
                     </p>
