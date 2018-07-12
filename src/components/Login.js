@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button  } from 'react-materialize'
+import { Button, Input, Row  } from 'react-materialize'
 
 
 class Login extends Component {
@@ -11,8 +11,6 @@ class Login extends Component {
     handleChange= (event) => {
         this.setState({[event.target.name]:event.target.value})
     }
-
-
 
     handleSumbit = (event) => {
         event.preventDefault();
@@ -48,11 +46,16 @@ class Login extends Component {
     render() {
         return (
             <div  className="column" >
-                <form action="" onSubmit = {this.handleSumbit}>
-                <input value= {this.state.username} type="text" name="username" id="username" placeholder="username" onChange={this.handleChange}/>
-                <input value= {this.state.password} type="password" name="password" id="password" placeholder="password" onChange={this.handleChange}/>
-                <Button waves='light'> Login</Button>
+                <form  action="" onSubmit = {this.handleSumbit}>
+                <Row>
+                <Input s={2} value= {this.state.username} type="text" name="username" id="username" placeholder="username" onChange={this.handleChange}/>
+                <Input s={2} value= {this.state.password} type="password" name="password" id="password" placeholder="password" onChange={this.handleChange}/>
+                </Row>
+                
+                <Button  waves='light'> Login</Button>
+
                 </form>
+
             </div>
         );
     }

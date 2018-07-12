@@ -3,7 +3,6 @@ import './App.css';
 import ChartStock from './components/ChartStock'
 import Search from './components/Search'
 import Detail from './components/Detail'
-import _ from 'lodash'
 import Login from './components/Login'
 import {Route, Switch } from 'react-router-dom'
 import SignUp from './components/SignUp'
@@ -55,6 +54,17 @@ class App extends Component {
       this.fetchQuote(); })
   }
 
+  removeFavorite = () => {
+    let  emptyState = {
+      searchTerm : '',
+      stockSymbol : '',
+      result: [],
+      chartData: [],
+      detailInfo: null,
+      fav: []
+    }
+    this.setState(emptyState);
+  }
 
 
 
@@ -124,7 +134,10 @@ class App extends Component {
   
                 
 
-                <Favorite  fav={this.state.fav} fetchFavs={this.fetchFavs}  { ...props } />
+                <Favorite  fav={this.state.fav} 
+                fetchFavs={this.fetchFavs}  
+                removeFavorite={this.removeFavorite}
+                { ...props } />
                 </React.Fragment>
               )
             }
