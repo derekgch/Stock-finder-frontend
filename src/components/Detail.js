@@ -36,12 +36,15 @@ class Detail extends Component {
             return (
                 <div>
                     <button onClick={this.handleClick}> Save</button> <br/>
-                    symbol: {symbol} <br />
-                     {companyName} <br />
-                    marketCap: {this.intToString(marketCap)} <br />
-                    latestTime: {latestTime} <br />
-                    Price: {delayedPrice} <br />
-                    changePercent: {changePercent} <br />
+                    <p>Symbol: {symbol} {" "}
+                    {companyName}
+                    </p>
+                    <p>
+                    MarketCap: {this.intToString(marketCap)}<span></span>
+                    LatestTime: {latestTime} {" "}
+                    Price: {delayedPrice} {" "}
+                    Change Percent: {changePercent}
+                    </p>
                 </div>
             );
         }else{

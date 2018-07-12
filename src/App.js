@@ -22,6 +22,10 @@ class App extends Component {
   }
 
   componentDidMount(){
+    this.fetchFavs()
+  }
+
+  fetchFavs = () => {
     if(localStorage.getItem('token')){
       const userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
       const url = "http://localhost:4000/users/" + userId;
@@ -31,14 +35,13 @@ class App extends Component {
             'Authorization': localStorage.getItem('token')
         },
     }
-      
-      fetch(url,config).then(r =>r.json()).then(
-        data => this.setState({ fav : data.user, stockSymbol:data.user[0].stock_symbol}, () => {
-          this.handleSelect(this.state.stockSymbol)
-        })
-      )
+
+      fetch(url,config).then(r =>r.json()).then(data => this.setState({ fav : data.user}))
     }
   }
+  
+
+  
 
   handleSearch= (event) =>{    
     this.setState({ searchTerm: event.target.value}, _.debounce(this.fetchSymbols, 300) )
@@ -114,7 +117,7 @@ class App extends Component {
   
                 <Detail data={this.state.detailInfo} userId={this.state.userId} { ...props }/>
 
-                <Favorite fav={this.state.fav}/>
+                <Favorite fav={this.state.fav} fetchFavs={this.fetchFavs}/>
                 </React.Fragment>
               )
             }
