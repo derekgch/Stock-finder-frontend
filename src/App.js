@@ -7,6 +7,10 @@ import Login from './components/Login'
 import {Route, Switch } from 'react-router-dom'
 import SignUp from './components/SignUp'
 import Favorite from './components/Favorite'
+import { TypeChooser } from "react-stockcharts/lib/helper";
+import MainStockChart from "./components/MainStockChart";
+import { getData } from "./components/utils";
+
 
 
 class App extends Component {
@@ -16,11 +20,20 @@ class App extends Component {
     result: [],
     chartData: [],
     detailInfo: null,
-    fav: []
+    fav: [],
+    data1: []
   }
 
   componentDidMount(){    
     this.fetchFavs()
+  }
+
+  fetchMainChart = () => {
+    getData(this.state.stockSymbol).then(
+      data => {
+        this.setState({ data1: data });
+      }
+    );
   }
 
   fetchFavs = () => {
@@ -52,6 +65,7 @@ class App extends Component {
     // const foundCompany= this.state.result.find( e => e.name.includes(stockSymbol))      
     this.setState({stockSymbol: sym, result:[], searchTerm: '' }, () => {
       this.fetchChart();
+      this.fetchMainChart();
       this.fetchQuote(); })
   }
 
@@ -95,7 +109,15 @@ class App extends Component {
   }
 
 
-  render() {    
+  render() {  
+    // console.log(this.state.data1)
+    let mainChartToDisplay = 
+      <TypeChooser>
+      {type => <MainStockChart type={type} data={this.state.data1} />}
+      </TypeChooser>
+
+    if(this.state.data1.length < 1){mainChartToDisplay = null}
+
     return (
       <div className="App" >
         <Switch>
@@ -126,12 +148,15 @@ class App extends Component {
                   fetchFavs={this.fetchFavs}
                   
                 />
-                <ChartStock 
+
+                {mainChartToDisplay}
+
+                {/* <ChartStock 
                 data={this.state.chartData} 
                 symbol={this.state.stockSymbol}
                 mainChart="true"
                 { ...props } 
-                />
+                /> */}
   
                 
 

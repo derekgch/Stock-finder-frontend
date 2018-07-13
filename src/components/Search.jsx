@@ -14,7 +14,7 @@ class Search extends Component {
                 suggestResultsObj = {...suggestResultsObj, [key]: null} 
             })
 
-        console.log(this.props.data);
+        // console.log(this.props.data);
 
         
         return (    
@@ -24,7 +24,7 @@ class Search extends Component {
                 <Autocomplete
                      onAutocomplete={(e)=>this.props.handleSelect(e)}
                     s={12}
-                    title='Company'
+                    title='Stock: Search Company'
                     data={suggestResultsObj}
                     value={this.props.searchTerm} 
                     onChange={this.props.handleSearch}
