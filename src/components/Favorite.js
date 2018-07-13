@@ -61,7 +61,7 @@ class Favorite extends Component {
         let i = 0       
         if (this.state.allFavsdata.length > 0 && this.state.allFavsdata.length === this.props.fav.length ) {
             return this.state.allFavsdata.map( data =>{
-                return <ChartStock key={i} data={data} symbol={this.props.fav[i++].stock_symbol} handleDelete={this.handleDelete}/>
+                return <ChartStock key={i} handleClickOnFavorite={this.props.handleClickOnFavorite} data={data} symbol={this.props.fav[i++].stock_symbol} handleDelete={this.handleDelete}/>
             })
         } else null
     }

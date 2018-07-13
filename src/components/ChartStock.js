@@ -23,8 +23,8 @@ class ChartStock extends Component {
        
 
         return (
-            <div className=" column " >
-                <span>{this.props.symbol ? this.props.symbol : null }{' '}
+            <div className=" column " onClick={() => {this.props.handleClickOnFavorite(this.props.symbol)}}>
+                <span> <h5> {this.props.symbol ? this.props.symbol : null }{' '}</h5>
                 { this.props.mainChart !== 'true' ? deleteButton : null  }
                     </span> 
                 <LineChart data={dataToDisplay} name="whh" min={null} max={null} label="Price" />

@@ -24,8 +24,16 @@ class App extends Component {
     data1: []
   }
 
+  handleClickOnFavorite = (sym) => {
+    // console.log('Cliked');
+    
+    this.setState({stockSymbol: sym},this.fetchMainChart )
+  }
+  
+
   componentDidMount(){    
     this.fetchFavs()
+    this.handleClickOnFavorite('DIA')
   }
 
   fetchMainChart = () => {
@@ -163,6 +171,7 @@ class App extends Component {
                 <Favorite  fav={this.state.fav} 
                 fetchFavs={this.fetchFavs}  
                 removeFavorite={this.removeFavorite}
+                handleClickOnFavorite={this.handleClickOnFavorite}
                 { ...props } />
                 </React.Fragment>
               )
