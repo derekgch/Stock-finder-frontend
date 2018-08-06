@@ -156,7 +156,7 @@ class App extends Component {
                   fetchFavs={this.fetchFavs}
                   
                 />
-
+                {mainChartToDisplay? `Symbol: ${this.state.stockSymbol}` : null}
                 {mainChartToDisplay}
 
                 {/* <ChartStock 
