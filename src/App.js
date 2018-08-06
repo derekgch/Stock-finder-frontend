@@ -27,7 +27,9 @@ class App extends Component {
   handleClickOnFavorite = (sym) => {
     // console.log('Cliked');
     
-    this.setState({stockSymbol: sym},this.fetchMainChart )
+    this.setState({stockSymbol: sym}, ()=> {
+      this.fetchMainChart();
+     })
   }
   
 
@@ -37,11 +39,14 @@ class App extends Component {
   }
 
   fetchMainChart = () => {
+
     getData(this.state.stockSymbol).then(
       data => {
         this.setState({ data1: data });
+        // console.log("inside main chart");
+        
       }
-    );
+    ).then(this.fetchQuote)
   }
 
   fetchFavs = () => {
@@ -109,6 +114,8 @@ class App extends Component {
 
   fetchQuote = () => {
   const API_URL = 'http://localhost:4000/api/v1/quote/' + this.state.stockSymbol
+  console.log("fetchQuote",this.state.stockSymbol);
+  
     if (this.state.stockSymbol.length > 0 ) {
       fetch(API_URL).then(r => r.json()).then(detailInfo => {
         this.setState({detailInfo})
@@ -156,7 +163,7 @@ class App extends Component {
                   fetchFavs={this.fetchFavs}
                   
                 />
-                {mainChartToDisplay? `Symbol: ${this.state.stockSymbol}` : null}
+                
                 {mainChartToDisplay}
 
                 {/* <ChartStock 
