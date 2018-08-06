@@ -4,9 +4,9 @@ The Stock Finder is a full stack single page web app that allows users to find s
 
 ## Getting Started
 To install the Stock Finder, first fork and clone the frontend and backend repo.  
-# Frontend: 
+### Frontend: 
 run 'npm install', then 'npm start', which will lauch the react frontend server.
-# Backend
+### Backend
 run `bundle install`, followed by `rails db:create && rails db:migrate`. Then, 'rails db:seed', finally run `rails s -p 4000`, which will launch the API on a local server.
 
 ## Built With
