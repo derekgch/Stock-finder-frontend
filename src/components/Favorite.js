@@ -15,8 +15,8 @@ class Favorite extends Component {
     
 
     componentDidUpdate(prevProps) {        
-        console.log("p", prevProps.fav.length, "this", this.props.fav.length)
-        if( prevProps.fav.length !== this.props.fav.length) {  
+        // console.log("p", prevProps.fav.length, "this", this.props.fav.length)
+        if( prevProps&& prevProps.fav.length !== this.props.fav.length) {  
             this.setState({
                 allFavsdata: []
             }, this.fetchFavsData)   

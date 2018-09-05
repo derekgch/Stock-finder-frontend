@@ -46,13 +46,17 @@ class Login extends Component {
     render() {
         return (
             <div  className="column" >
+                <h1>Stock Finder </h1>
+
                 <form  action="" onSubmit = {this.handleSumbit}>
                 <Row>
-                <Input s={2} value= {this.state.username} type="text" name="username" id="username" placeholder="username" onChange={this.handleChange}/>
-                <Input s={2} value= {this.state.password} type="password" name="password" id="password" placeholder="password" onChange={this.handleChange}/>
-                </Row>
+                <Input s={2} value= {this.state.username} type="text" name="username" id="username" placeholder="Username" onChange={this.handleChange}/>
+                <Input s={2} value= {this.state.password} type="password" name="password" id="password" placeholder="Password" onChange={this.handleChange}/>
                 
+                </Row>
                 <Button  waves='light'> Login</Button>
+
+                
 
                 </form>
 

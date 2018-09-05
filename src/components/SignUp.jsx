@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button  } from 'react-materialize'
+import { Button, Row, Input  } from 'react-materialize'
 
 
 class SignUp extends Component {
@@ -33,18 +33,20 @@ class SignUp extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" placeholder="Name" name="name" 
+                    <Row>
+                    <Input type="text" placeholder="Name" name="name" 
                     onChange={this.handleChange}
                     value={this.state.name}
                      />
-                    <input type="text" placeholder="Username" name="username" 
+                    <Input type="text" placeholder="Username" name="username" 
                     onChange={this.handleChange}
                     value={this.state.username}
                      />
-                    <input type="password" placeholder="Password" name="password" 
+                    <Input type="password" placeholder="Password" name="password" 
                     onChange={this.handleChange}
                     value={this.state.password}
                      />
+                     </Row>
                      <Button> Create Account </Button>
                     {/* <input type="submit" value="Create Account"/> */}
                 </form>    

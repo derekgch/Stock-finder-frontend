@@ -128,7 +128,7 @@ class App extends Component {
     // console.log(this.state.data1)
     let mainChartToDisplay = 
       <TypeChooser>
-      {type => <MainStockChart type={type} data={this.state.data1} />}
+      {type => <MainStockChart type={type} data={this.state.data1} width={window.innerWidth}/>}
       </TypeChooser>
 
     if(this.state.data1.length < 1){mainChartToDisplay = null}
