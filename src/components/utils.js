@@ -2,6 +2,7 @@
 
 import { tsvParse, csvParse } from  "d3-dsv";
 import { timeParse } from "d3-time-format";
+import {URL, local_URL} from '../Adapter';
 
 function parseData(parse) {
 	return function(d) {
@@ -19,7 +20,7 @@ function parseData(parse) {
 const parseDate = timeParse("%Y-%m-%d");
 
 export function getData(sym) {
-	const promiseMSFT = fetch("http://localhost:4000/api/v1/more/"+sym)
+	const promiseMSFT = fetch(local_URL+"api/v1/more/"+sym)
         .then(response => response.json())
         .then(data => data.map(e =>{return {...e, "date":parseDate(e.date) }} ))
         // .then(console.log)

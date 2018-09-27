@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Input, Row  } from 'react-materialize'
+import {URL, local_URL} from '../Adapter';
 
 
 class Login extends Component {
@@ -29,7 +30,7 @@ class Login extends Component {
     }
 
     loginSession(){
-        const url = "http://localhost:4000/sessions";
+        const url = local_URL+ "sessions";
         let config = {
             method: "POST",
             headers: {

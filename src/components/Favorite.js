@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import ChartStock from './ChartStock'
-import { Button  } from 'react-materialize'
+import { Button  } from 'react-materialize';
+import {URL, local_URL} from '../Adapter';
+
 
 
 class Favorite extends Component {
@@ -25,7 +27,7 @@ class Favorite extends Component {
     }
     
     fetchFavsData = () => {
-        const API_URL = "http://localhost:4000/api/v1/stock_symbols/" 
+        const API_URL = local_URL+ "api/v1/stock_symbols/" 
         this.props.fav.forEach(element => {
             fetch(API_URL + element.stock_symbol).then(r => r.json())                
             .then( d => {this.setState({ allFavsdata: [...this.state.allFavsdata, d ] })            })
@@ -36,7 +38,7 @@ class Favorite extends Component {
     handleDelete = (sym) => {
         const userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
    
-        const API = 'http://localhost:4000/users/' + userId
+        const API = local_URL+'users/' + userId
            const config = {
                method: "PATCH",
                headers: {

@@ -10,6 +10,7 @@ import Favorite from './components/Favorite'
 import { TypeChooser } from "react-stockcharts/lib/helper";
 import MainStockChart from "./components/MainStockChart";
 import { getData } from "./components/utils";
+import {URL, local_URL} from './Adapter';
 
 
 
@@ -52,7 +53,7 @@ class App extends Component {
   fetchFavs = () => {
     if(localStorage.getItem('token')){
       const userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
-      const url = "http://localhost:4000/users/" + userId;
+      const url = local_URL+"users/" + userId;
       let config = {
         headers: {
             'Content-Type': 'application/JSON',
@@ -97,14 +98,14 @@ class App extends Component {
 
 
   fetchSymbols= () =>{
-    const API_URL = "http://localhost:4000/api/v1/search/" + this.state.searchTerm
+    const API_URL = local_URL+ "api/v1/search/" + this.state.searchTerm
     if (this.state.searchTerm.length > 0 ) {
       fetch(API_URL).then(r => r.json()).then(data => this.setState({result: data}))
     } else { this.setState({result: [] }) }
   }
 
   fetchChart = () => {
-    const API_URL = "http://localhost:4000/api/v1/stock_symbols/" + this.state.stockSymbol
+    const API_URL = local_URL+ "api/v1/stock_symbols/" + this.state.stockSymbol
     if (this.state.stockSymbol.length > 0 ) {
       fetch(API_URL).then(r => r.json()).then(chartData => {
         this.setState({chartData})
@@ -113,7 +114,7 @@ class App extends Component {
   }
 
   fetchQuote = () => {
-  const API_URL = 'http://localhost:4000/api/v1/quote/' + this.state.stockSymbol
+  const API_URL = local_URL+ "api/v1/quote/" + this.state.stockSymbol
   console.log("fetchQuote",this.state.stockSymbol);
   
     if (this.state.stockSymbol.length > 0 ) {

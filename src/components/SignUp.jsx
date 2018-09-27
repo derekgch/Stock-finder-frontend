@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Row, Input  } from 'react-materialize'
+import {URL, local_URL} from '../Adapter';
 
 
 class SignUp extends Component {
@@ -16,7 +17,7 @@ class SignUp extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-      const API = 'http://localhost:4000/users'
+      const API = local_URL+'users'
       const config = {
           method: 'POST',
           headers: {"Content-type":"application/json"},

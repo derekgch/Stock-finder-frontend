@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button  } from 'react-materialize'
+import { Button  } from 'react-materialize';
+import {URL, local_URL} from '../Adapter';
 
 class Detail extends Component {
 
@@ -16,7 +17,7 @@ class Detail extends Component {
     handleClick= (event) => {
         event.preventDefault();
         const userId = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).id;
-        const url = "http://localhost:4000/users/" + userId;
+        const url = local_URL + "users/" + userId;
         const config ={
             method: "PATCH",
             headers: {
