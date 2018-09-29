@@ -21,6 +21,13 @@ class Login extends Component {
             alert("Wrong username / Password")
         })
     }
+    handleGuestButton = event =>{
+        event.preventDefault();
+        this.setState({
+            password: "guest",
+            username: "guest"
+        }, ()=> this.handleSumbit(event));
+    }
 
      handleErrors(response) {
         if (!response.ok) {
@@ -49,6 +56,7 @@ class Login extends Component {
             <div  className="column" >
                 <h1>Stock Finder </h1>
 
+                <Button waves='light' onClick ={this.handleGuestButton} >Login as Guest </Button>
                 <form  action="" onSubmit = {this.handleSumbit}>
                 <Row>
                 <Input s={2} value= {this.state.username} type="text" name="username" id="username" placeholder="Username" onChange={this.handleChange}/>
@@ -56,8 +64,6 @@ class Login extends Component {
                 
                 </Row>
                 <Button  waves='light'> Login</Button>
-
-                
 
                 </form>
 
