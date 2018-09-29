@@ -11,6 +11,10 @@ run `npm install`, then `npm start`, which will lauch the react frontend server.
 ### Backend
 run `bundle install`, followed by `rails db:create && rails db:migrate`. Then, `rails db:`, finally run `rails s -p 4000`, which will launch the API on a local server.
 
+
+## Heroku Demo
+https://frontend-stockfinder.herokuapp.com
+
 ## Built With
 React - Javascript  
 Ruby on Rails  
