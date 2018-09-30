@@ -44,7 +44,7 @@ class Detail extends Component {
                     <p></p>
                     Price: {delayedPrice} {" "}
                     MarketCap: {this.intToString(marketCap)}{" "}
-                    Change Percent: {changePercent*100}{" "}
+                    Change Percent: {(changePercent*100).toFixed(2)}{"% "}
                     LatestTime: {latestTime} {" "}
 
                     </p>
