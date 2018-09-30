@@ -9,7 +9,7 @@ To install the Stock Finder, first fork and clone the frontend and backend repo.
 ### Frontend: 
 run `npm install`, then `npm start`, which will lauch the react frontend server.
 ### Backend
-run `bundle install`, followed by `rails db:create && rails db:migrate`. Then, `rails db:`, finally run `rails s -p 4000`, which will launch the API on a local server.
+run `bundle install`, followed by `rails db:create && rails db:migrate`. Then `rails c` and StockSymbol.get_symbols, finally run `rails s -p 4000`, which will launch the API on a local server.
 
 
 ## Heroku Demo
