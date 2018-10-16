@@ -15,6 +15,14 @@ class SignUp extends Component {
       })
     }
 
+    handleErrors(response) {
+        console.log(response)
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
+    }
+
     handleSubmit = (event) => {
         event.preventDefault()
       const API = local_URL+'users'
@@ -23,10 +31,17 @@ class SignUp extends Component {
           headers: {"Content-type":"application/json"},
           body: JSON.stringify(this.state)
       }
-      fetch(API, config).then(r => r.json()).then( d => {
-        localStorage.setItem('token', d.token)
-        this.props.history.push('/')
-      })
+      fetch(API, config).then(this.handleErrors).then( d => {
+        console.log(d)
+        if(d.token){
+            localStorage.setItem('token', d.token)
+            this.props.history.push('/')
+        }else{
+            alert(Object.keys(d)+" "+ d[Object.keys(d)]);
+        }
+      }).catch(function(error) {
+        alert("username already taken!")
+        })
     }
     
     
