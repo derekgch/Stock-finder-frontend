@@ -41,7 +41,7 @@ class Detail extends Component {
                      onClick={this.handleClick}><i class="material-icons">+</i></button> <br/> */}
                     <p>Symbol: {symbol} {" "}
                     {companyName}
-                    <p></p>
+                    <br></br>
                     Price: {delayedPrice} {" "}
                     MarketCap: {this.intToString(marketCap)}{" "}
                     Change Percent: {(changePercent*100).toFixed(2)}{"% "}

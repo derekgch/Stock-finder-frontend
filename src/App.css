@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 /* 
 .dropdown-content {
   display: none;
@@ -63,9 +58,7 @@
 
 /* Change color of dropdown links on hover */
 /* .dropdown-content a:hover {background-color: #f1f1f1} */
-.mainChart{
-  display: flex;
-}
+
 
 .container {
   display: flex;
@@ -74,7 +67,14 @@
 
 }
 
+
+
 .column {
   flex: 1;
-  /* border: 1px solid blue; */
+   /* border: 1px solid blue; */
+ }
+
+
+.react-stockchart{
+  left: 0;
 }
