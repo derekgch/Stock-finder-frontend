@@ -34,9 +34,10 @@ class App extends Component {
   }
   
 
-  componentDidMount(){    
-    this.fetchFavs()
-    this.handleClickOnFavorite('DIA')
+  componentDidMount(){  
+    document.title= "Realtime Stock Finder APP";  
+    this.fetchFavs();
+    this.handleClickOnFavorite('DIA');
   }
 
   fetchMainChart = () => {
