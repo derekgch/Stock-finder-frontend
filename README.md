@@ -15,6 +15,9 @@ run `bundle install`, followed by `rails db:create && rails db:migrate`. Then `r
 ![screen shot 2018-09-29 at 9 31 56 pm](https://user-images.githubusercontent.com/25042871/46251979-5007de00-c42f-11e8-88cb-40255b4a1ec6.png)
 
 
+## Video Demo
+https://www.youtube.com/watch?v=hIrq1UIZmIo
+
 ## Heroku Demo
 https://frontend-stockfinder.herokuapp.com
 
@@ -22,6 +25,7 @@ https://frontend-stockfinder.herokuapp.com
 React - Javascript  
 Ruby on Rails  
 PostgreSQL  
+JWT Authorization
 Materialized UI
 CSS
 
