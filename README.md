@@ -18,7 +18,8 @@ run `bundle install`, followed by `rails db:create && rails db:migrate`. Then `r
 ## Video Demo
 https://www.youtube.com/watch?v=hIrq1UIZmIo
 
-## Heroku Demo
+## Heroku Demo 
+Please allow 30 seconds for the server to boot up
 https://frontend-stockfinder.herokuapp.com
 
 ## Built With
